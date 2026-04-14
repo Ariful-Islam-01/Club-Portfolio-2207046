@@ -68,6 +68,43 @@ body {
     overflow-x: hidden;
 }
 
+/* ===== CONTAINER & UTILITIES ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.section-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-light));
+    margin: var(--spacing-sm) auto 0;
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-top: var(--spacing-sm);
+}
+
 /* ===== BUTTONS ===== */
 .btn {
     display: inline-block;
@@ -380,4 +417,158 @@ body {
 @keyframes scrollBounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ===== ABOUT SECTION ===== */
+.about {
+    padding: var(--spacing-2xl) 0;
+    background: var(--light-bg);
+}
+
+.about-intro {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-2xl);
+    text-align: center;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.8;
+}
+
+.about-quote {
+    background: white;
+    padding: var(--spacing-lg);
+    border-left: 5px solid var(--accent-color);
+    border-radius: var(--radius-md);
+    font-style: italic;
+    color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+    margin: var(--spacing-2xl) 0;
+}
+
+.timeline-title {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xl);
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--accent-color);
+}
+
+.timeline-item {
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    padding-right: 52%;
+}
+
+.timeline-item:nth-child(even) {
+    padding-left: 52%;
+}
+
+.timeline-item:nth-child(odd) .timeline-date {
+    text-align: right;
+    padding-right: var(--spacing-lg);
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+    text-align: left;
+    padding-left: var(--spacing-lg);
+}
+
+.timeline-date {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: var(--dark-bg);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    z-index: 2;
+    font-size: 0.9rem;
+    width: auto;
+    white-space: nowrap;
+}
+
+.timeline-content {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.timeline-content h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-heading);
+}
+
+.timeline-content p {
+    color: var(--text-light);
+}
+
+/* ===== VALUES GRID ===== */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.value-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border-top: 4px solid var(--primary-color);
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-top-color: var(--accent-color);
+}
+
+.value-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.value-card h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+}
+
+.value-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
 }
