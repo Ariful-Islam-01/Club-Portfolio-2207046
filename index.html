@@ -148,5 +148,82 @@
         </div>
     </section>
 
+    <!-- ===== EVENTS SECTION ===== -->
+    <section class="events" id="events">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <p class="section-subtitle">Join Us for Amazing Experiences</p>
+            </div>
+
+            <div class="carousel-container">
+                <!-- TODO: Add JavaScript carousel navigation (previous/next functionality) -->
+                <button class="carousel-btn carousel-prev" id="eventPrev" aria-label="Previous event">❮</button>
+                
+                <div class="events-grid" id="eventsCarousel">
+                    <!-- Event Card 1 -->
+                    <article class="event-card">
+                        <div class="event-image" style="background-image: url('Event demo image.png');"></div>
+                        <div class="event-content">
+                            <span class="event-date">March 15, 2024</span>
+                            <h3>Leadership Training Workshop</h3>
+                            <p>Intensive workshop on leadership skills, team management, and decision-making for aspiring leaders.</p>
+                            <div class="event-meta">
+                                <span class="event-location">📍 KUET Campus</span>
+                                <span class="event-time">⏰ 10:00 AM - 3:00 PM</span>
+                            </div>
+                            <a href="#" class="event-link">Learn More →</a>
+                        </div>
+                    </article>
+
+                    <!-- Event Card 2 -->
+                    <article class="event-card">
+                        <div class="event-image" style="background-image: url('Event demo image.png');"></div>
+                        <div class="event-content">
+                            <span class="event-date">March 22, 2024</span>
+                            <h3>Community Cleanup Drive</h3>
+                            <p>Join us in serving the community through environmental cleanliness and social awareness programs.</p>
+                            <div class="event-meta">
+                                <span class="event-location">📍 Khulna City</span>
+                                <span class="event-time">⏰ 8:00 AM - 12:00 PM</span>
+                            </div>
+                            <a href="#" class="event-link">Learn More →</a>
+                        </div>
+                    </article>
+
+                    <!-- Event Card 3 -->
+                    <article class="event-card">
+                        <div class="event-image" style="background-image: url('Event demo image.png');"></div>
+                        <div class="event-content">
+                            <span class="event-date">April 5, 2024</span>
+                            <h3>Skill Development Seminar</h3>
+                            <p>Learn essential survival skills, first aid, and outdoor techniques with expert instructors.</p>
+                            <div class="event-meta">
+                                <span class="event-location">📍 KUET Campus</span>
+                                <span class="event-time">⏰ 2:00 PM - 5:00 PM</span>
+                            </div>
+                            <a href="#" class="event-link">Learn More →</a>
+                        </div>
+                    </article>
+
+                </div>
+                
+                <button class="carousel-btn carousel-next" id="eventNext" aria-label="Next event">❯</button>
+            </div>
+            
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators" id="eventIndicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+            </div>
+
+            <!-- TODO: Add JavaScript pagination or filtering for events -->
+            <div class="section-cta">
+                <a href="#" class="btn btn-primary">View All Events</a>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
