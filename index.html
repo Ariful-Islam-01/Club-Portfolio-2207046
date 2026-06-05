@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KUET Rover Scout Group - Khulna University of Engineering and Technology Rover Scout Group. Inspiring youth through scouting values and community service.">
+    <meta name="description" content="KUET Rover Scout Group - Khulna University of Engineering and Technology Scout Group. Inspiring youth through scouting values and community service.">
     <meta name="theme-color" content="#2d5016">
     <title>KUET Rover Scout Group - Be Prepared</title>
     <link rel="stylesheet" href="style.css">
@@ -13,7 +13,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="Bangladesh_Scouts_Logo.png" alt="Scout Logo" class="logo-image">
+                <img src="Bangladesh_Scouts_Logo.png" alt="Bangladesh Scouts logo" class="logo-image">
                 <div class="logo-text-group">
                     <a href="#home" class="logo-text">KUET ROVER SCOUT GROUP</a>
                     <span class="logo-subtitle">Est. 2010</span>
@@ -28,6 +28,11 @@
                 <li class="nav-item"><a href="#members" class="nav-link">Members</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -157,13 +162,12 @@
             </div>
 
             <div class="carousel-container">
-                <!-- TODO: Add JavaScript carousel navigation (previous/next functionality) -->
-                <button class="carousel-btn carousel-prev" id="eventPrev" aria-label="Previous event">❮</button>
+                <button class="carousel-btn carousel-prev" id="eventPrev" type="button" aria-label="Previous event">❮</button>
                 
                 <div class="events-grid" id="eventsCarousel">
                     <!-- Event Card 1 -->
                     <article class="event-card">
-                        <div class="event-image" style="background-image: url('Event demo image.png');"></div>
+                        <div class="event-image" style="background-image: url('Event 1.jpg');"></div>
                         <div class="event-content">
                             <span class="event-date">March 15, 2024</span>
                             <h3>Leadership Training Workshop</h3>
@@ -178,7 +182,7 @@
 
                     <!-- Event Card 2 -->
                     <article class="event-card">
-                        <div class="event-image" style="background-image: url('Event demo image.png');"></div>
+                        <div class="event-image" style="background-image: url('Event 2.jpg');"></div>
                         <div class="event-content">
                             <span class="event-date">March 22, 2024</span>
                             <h3>Community Cleanup Drive</h3>
@@ -208,7 +212,7 @@
 
                 </div>
                 
-                <button class="carousel-btn carousel-next" id="eventNext" aria-label="Next event">❯</button>
+                <button class="carousel-btn carousel-next" id="eventNext" type="button" aria-label="Next event">❯</button>
             </div>
             
             <!-- Carousel Indicators -->
@@ -218,9 +222,57 @@
                 <span class="indicator" data-slide="2"></span>
             </div>
 
-            <!-- TODO: Add JavaScript pagination or filtering for events -->
             <div class="section-cta">
-                <a href="#" class="btn btn-primary">View All Events</a>
+                <a href="#contact" class="btn btn-primary">View All Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CAMPS SECTION ===== -->
+    <section class="camps" id="camps">
+        <div class="container">
+            <div class="section-header">
+                <h2>Scout Camps</h2>
+                <p class="section-subtitle">Build Skills, Create Memories, Embrace Adventure</p>
+            </div>
+
+            <div class="camps-grid">
+                <!-- Camp Card 1 -->
+                <div class="camp-card">
+                    <div class="camp-image" style="background-image: url('Camp 1.jpg');"></div>
+                    <div class="camp-badge">Summer</div>
+                    <div class="camp-content">
+                        <h3>Summer Adventure Camp</h3>
+                        <p>7 days of outdoor adventure with camping, hiking, rock climbing, and wilderness survival skills.</p>
+                        <a href="#contact" class="btn btn-small">Details</a>
+                    </div>
+                </div>
+
+                <!-- Camp Card 2 -->
+                <div class="camp-card">
+                    <div class="camp-image" style="background-image: url('Camp 2.jpg');"></div>
+                    <div class="camp-badge">Winter</div>
+                    <div class="camp-content">
+                        <h3>Winter Leadership Camp</h3>
+                        <p>5 days focused on leadership development, crisis management, and personal growth experiences.</p>
+                        <a href="#contact" class="btn btn-small">Details</a>
+                    </div>
+                </div>
+
+                <!-- Camp Card 3 -->
+                <div class="camp-card">
+                    <div class="camp-image" style="background-image: url('Camp 3.jpg');"></div>
+                    <div class="camp-badge">Spring</div>
+                    <div class="camp-content">
+                        <h3>Spring Community Service Camp</h3>
+                        <p>4 days of meaningful service projects, environmental awareness, and sustainable development.</p>
+                        <a href="#contact" class="btn btn-small">Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-cta">
+                <a href="#contact" class="btn btn-primary">View All Camps</a>
             </div>
         </div>
     </section>
