@@ -497,5 +497,102 @@
         </div>
     </section>
 
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p class="section-subtitle">Have Questions? We'd Love to Hear from You</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h3>Send us a Message</h3>
+                    <!-- TODO: Connect form to backend (PHP/ASP.NET) for email/database storage -->
+                    <form class="contact-form" id="contactForm" method="POST" action="#">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="Your Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+880 1XXX XXXXXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">-- Select a Subject --</option>
+                                <option value="membership">Membership Inquiry</option>
+                                <option value="event">Event Information</option>
+                                <option value="camp">Camp Registration</option>
+                                <option value="volunteer">Volunteer Opportunity</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Your message here..." rows="6"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info-container">
+                    <h3>Contact Information</h3>
+
+                    <div class="contact-info-box">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>SWC Room - 211</p>
+                            <p>Khulna University of Engineering and Technology</p>
+                            <p>Khulna-9203, Bangladesh</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-box">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p><a href="tel:+8801631687525">+88 01631 687525</a></p>
+                            <p><a href="tel:+8801800000000">+88 01800 000000</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-box">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:rover@club.kuet.ac.bd">rover@club.kuet.ac.bd</a></p>
+                            <p><a href="mailto:kuetroverscoutgroup@gmail.com">kuetroverscoutgroup@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-links">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" title="Facebook" aria-label="Facebook">f</a>
+                            <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">📷</a>
+                            <a href="#" class="social-icon" title="Twitter" aria-label="Twitter">𝕏</a>
+                            <a href="#" class="social-icon" title="YouTube" aria-label="YouTube">▶</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
