@@ -1309,3 +1309,182 @@ section[id] {
 .footer-bottom p {
     margin-bottom: 5px;
 }
+
+/* ===== SCROLL TO TOP BUTTON ===== */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+    z-index: 99;
+}
+
+.scroll-to-top.show {
+    display: flex;
+}
+
+.scroll-to-top:hover {
+    background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* ===== JS STATES ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.menu-open,
+body.modal-open {
+    overflow: hidden;
+}
+
+.form-status {
+    margin: 0 0 var(--spacing-md);
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+}
+
+.form-status.success {
+    background: rgba(76, 175, 80, 0.12);
+    color: var(--success-color);
+    border: 1px solid rgba(76, 175, 80, 0.25);
+}
+
+.form-status.error {
+    background: rgba(244, 67, 54, 0.1);
+    color: var(--error-color);
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.form-group.is-invalid input,
+.form-group.is-invalid textarea,
+.form-group.is-invalid select {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.08);
+}
+
+.form-group.is-valid input,
+.form-group.is-valid textarea,
+.form-group.is-valid select {
+    border-color: var(--success-color);
+}
+
+.field-message {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--error-color);
+    font-size: 0.85rem;
+}
+
+
+
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+.gallery-lightbox.is-open {
+    display: flex;
+}
+
+.gallery-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 16, 8, 0.75);
+    backdrop-filter: blur(6px);
+}
+
+.lightbox-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(920px, 100%);
+    max-height: min(88vh, 920px);
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr;
+}
+
+.lightbox-image {
+    min-height: 360px;
+    background-size: cover;
+    background-position: center;
+}
+
+.lightbox-caption {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.lightbox-caption h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.lightbox-caption p {
+    color: var(--text-light);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+}
+
+.lightbox-close:hover {
+    background: var(--accent-color);
+    color: var(--dark-bg);
+}
+
+.nav-link:focus-visible,
+.hamburger:focus-visible,
+.carousel-btn:focus-visible,
+.filter-btn:focus-visible,
+.scroll-to-top:focus-visible,
+.social-icon:focus-visible,
+.lightbox-close:focus-visible,
+.gallery-item:focus-visible {
+    outline: 3px solid rgba(212, 175, 55, 0.55);
+    outline-offset: 3px;
+}

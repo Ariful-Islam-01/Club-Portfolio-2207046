@@ -638,5 +638,25 @@
         </div>
     </footer>
 
+    <!-- ===== GALLERY LIGHTBOX ===== -->
+    <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+        <div class="gallery-lightbox-backdrop" data-lightbox-close></div>
+        <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-describedby="lightboxMeta">
+            <button type="button" class="lightbox-close" aria-label="Close gallery preview" data-lightbox-close>×</button>
+            <div class="lightbox-image" id="lightboxImage"></div>
+            <div class="lightbox-caption">
+                <p class="lightbox-meta" id="lightboxMeta"></p>
+                <h3 id="lightboxTitle"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCROLL TO TOP BUTTON ===== -->
+    <button type="button" class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <span>↑</span>
+    </button>
+
+    <script src="script.js" defer></script>
+
 </body>
 </html>
