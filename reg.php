@@ -34,7 +34,7 @@ $flash = app_flash_get();
                 <li class="nav-item"><a href="index.php#gallery" class="nav-link">Gallery</a></li>
                 <li class="nav-item"><a href="index.php#members" class="nav-link">Members</a></li>
                 <li class="nav-item"><a href="index.php#contact" class="nav-link">Contact</a></li>
-                <li class="nav-item"><a href="admin/login.php" class="nav-link nav-link-admin">Admin Login</a></li>
+                <li class="nav-item"><a href="admin/login.php" class="nav-link nav-link-admin">Admin</a></li>
             </ul>
             <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">
                 <span></span>
