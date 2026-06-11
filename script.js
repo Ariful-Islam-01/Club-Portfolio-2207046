@@ -1,3 +1,6 @@
+// --- Client-side interactions for the public site.
+// This script handles navigation, section highlighting, event carousel behavior,
+// gallery lightbox interactions, contact form validation, and reveal animations.
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.getElementById('navbar');
     const navMenu = document.getElementById('navMenu');
@@ -9,7 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventIndicators = [...document.querySelectorAll('#eventIndicators .indicator')];
     const navLinks = [...document.querySelectorAll('.nav-link')];
     const sections = navLinks
-        .map((link) => document.querySelector(link.getAttribute('href')))
+        .map((link) => {
+            const href = link.getAttribute('href');
+            return href && href.startsWith('#') ? document.querySelector(href) : null;
+        })
         .filter(Boolean);
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -22,9 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initEventCarousel();
     initGallery();
     initContactForm();
+    initEventActions();
     initReveals();
     initCounters();
 
+    // --- Update the footer's copyright year on each page load. ---
     function updateFooterYear() {
         const footerLine = document.querySelector('.footer-bottom p');
         if (!footerLine) {
@@ -35,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         footerLine.innerHTML = `&copy; ${year} KUET Rover Scout Group. All rights reserved.`;
     }
 
+    // --- Toggle the mobile menu and close it on navigation or resize. ---
     function initMobileNavigation() {
         if (!navMenu || !hamburger) {
             return;
@@ -80,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Sync the navbar state and active section link while the user scrolls. ---
     function initScrollEffects() {
         if (!navbar || !scrollToTop) {
             return;
@@ -129,29 +139,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         navLinks.forEach((link) => {
-            const targetId = link.getAttribute('href').slice(1);
+            const href = link.getAttribute('href') || '';
+            const targetId = href.startsWith('#') ? href.slice(1) : '';
             link.classList.toggle('active', targetId === activeSectionId);
         });
     }
 
+    // --- Rotate featured events through the homepage carousel controls. ---
     function initEventCarousel() {
         if (!eventCarousel) {
             return;
         }
 
-        const cards = [...eventCarousel.querySelectorAll('.event-card')];
-
-        if (!cards.length) {
-            return;
-        }
+        const getVisibleCards = () => [...eventCarousel.querySelectorAll('.event-card:not(.is-hidden)')];
+        const getVisibleIndicators = () => [...document.querySelectorAll('#eventIndicators .indicator')];
 
         const updateIndicators = (index) => {
-            eventIndicators.forEach((indicator, indicatorIndex) => {
+            const visibleIndicators = getVisibleIndicators();
+            visibleIndicators.forEach((indicator, indicatorIndex) => {
                 indicator.classList.toggle('active', indicatorIndex === index);
             });
         };
 
         const scrollToIndex = (index) => {
+            const cards = getVisibleCards();
+            if (!cards.length) {
+                return;
+            }
+
             const boundedIndex = Math.max(0, Math.min(index, cards.length - 1));
             currentEventIndex = boundedIndex;
             eventCarousel.scrollTo({
@@ -162,6 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const syncIndexFromScroll = () => {
+            const cards = getVisibleCards();
+            if (!cards.length) {
+                return;
+            }
+
             const containerCenter = eventCarousel.scrollLeft + eventCarousel.clientWidth / 2;
             let closestIndex = 0;
             let closestDistance = Number.POSITIVE_INFINITY;
@@ -220,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToIndex(0);
     }
 
+    // --- Support category filters and the gallery lightbox preview. ---
     function initGallery() {
         const filterButtons = [...document.querySelectorAll('.filter-btn')];
         const galleryItems = [...document.querySelectorAll('.gallery-item')];
@@ -228,12 +249,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalTitle = document.getElementById('lightboxTitle');
         const modalMeta = document.getElementById('lightboxMeta');
         const modalCloseButton = modalRoot?.querySelector('.lightbox-close');
+        const galleryMoreButton = document.getElementById('galleryMoreButton');
 
         if (!galleryItems.length || !modalRoot || !modalImage || !modalTitle || !modalMeta || !modalCloseButton) {
             return;
         }
 
+        const galleryPreviewLimit = 8;
         let lastFocusedElement = null;
+        let activeFilter = 'all';
+        let isExpanded = false;
+
+        const updateGalleryView = () => {
+            const filteredItems = galleryItems.filter((item) => activeFilter === 'all' || item.dataset.category === activeFilter);
+            const shouldLimitPreview = Boolean(galleryMoreButton);
+
+            galleryItems.forEach((item) => {
+                const isMatch = filteredItems.includes(item);
+                const itemIndex = filteredItems.indexOf(item);
+                const shouldShow = isMatch && (!shouldLimitPreview || isExpanded || itemIndex < galleryPreviewLimit);
+                item.hidden = !shouldShow;
+                item.classList.toggle('is-hidden', !shouldShow);
+            });
+
+            if (galleryMoreButton) {
+                const hasMore = filteredItems.length > galleryPreviewLimit;
+                galleryMoreButton.hidden = !hasMore;
+                galleryMoreButton.textContent = isExpanded ? 'Show Less Photos' : 'View More Photos';
+            }
+        };
 
         const openModal = (galleryItem) => {
             const image = galleryItem.querySelector('.gallery-image');
@@ -270,17 +314,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 filterButtons.forEach((item) => item.classList.remove('active'));
                 button.classList.add('active');
 
-                galleryItems.forEach((galleryItem) => {
-                    const shouldShow = filter === 'all' || galleryItem.dataset.category === filter;
-                    galleryItem.hidden = !shouldShow;
-                    galleryItem.classList.toggle('is-hidden', !shouldShow);
-                });
+                activeFilter = filter;
+                isExpanded = false;
+                updateGalleryView();
 
                 if (modalRoot.classList.contains('is-open')) {
                     closeModal();
                 }
             });
         });
+
+        if (galleryMoreButton) {
+            galleryMoreButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                window.location.assign('gallery.php');
+            });
+        }
 
         galleryItems.forEach((galleryItem) => {
             const title = galleryItem.querySelector('h4')?.textContent ?? 'Gallery item';
@@ -316,8 +365,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal();
             }
         });
+
+        updateGalleryView();
     }
 
+    // --- Route event calls to action and contact form prefill behavior. ---
+    function initEventActions() {
+        const eventCta = document.querySelector('.events-cta');
+        const eventLinks = [...document.querySelectorAll('.event-link')];
+        const form = document.getElementById('contactForm');
+
+        if (!form) {
+            return;
+        }
+
+        const subjectField = form.querySelector('#subject');
+        const messageField = form.querySelector('#message');
+
+        const openContactForEvent = (title, date) => {
+            const contactSection = document.getElementById('contact');
+            const subjectValue = 'event';
+            const detailMessage = title
+                ? `Hello, I would like to know more about the event "${title}"${date ? ` on ${date}` : ''}. Please share the details and participation information.`
+                : 'Hello, I would like to know more about the upcoming events and how to participate.';
+
+            if (subjectField) {
+                subjectField.value = subjectValue;
+            }
+
+            if (messageField) {
+                messageField.value = detailMessage;
+            }
+
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+            }
+
+            if (subjectField) {
+                subjectField.focus({ preventScroll: true });
+            }
+        };
+
+        if (eventCta) {
+            eventCta.addEventListener('click', () => {
+                window.location.assign('events.php');
+            });
+        }
+
+        eventLinks.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const title = link.dataset.eventTitle || 'this event';
+                const date = link.dataset.eventDate || '';
+                openContactForEvent(title, date);
+            });
+        });
+    }
+
+    // --- Validate the contact form before submitting it to the PHP backend. ---
     function initContactForm() {
         const form = document.getElementById('contactForm');
 
@@ -400,20 +505,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.disabled = true;
             }
 
-            showStatus('success', 'Thanks. Your message is ready to be sent and the form has been validated successfully.');
-            form.reset();
-
-            Object.values(fields).forEach((field) => {
-                if (field) {
-                    clearFieldState(field);
-                }
-            });
+            showStatus('success', 'Message validated. Sending it to the PHP backend...');
 
             window.setTimeout(() => {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                }
-            }, 1200);
+                form.submit();
+            }, 200);
         });
 
         function markField(field, isValid, messageText) {
@@ -470,6 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Reveal content sections as they enter the viewport. ---
     function initReveals() {
         const revealTargets = document.querySelectorAll(
             '.section-header, .about-intro, .timeline-item, .value-card, .event-card, .camp-card, .gallery-item, .member-card, .contact-form-container, .contact-info-box, .social-links, .map-placeholder, .stat-box'
@@ -501,6 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealTargets.forEach((target) => revealObserver.observe(target));
     }
 
+    // --- Animate the homepage statistics counters when they appear. ---
     function initCounters() {
         const counters = [...document.querySelectorAll('.stat-box h3')];
 
